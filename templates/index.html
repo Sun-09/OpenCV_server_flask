@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Video Streamming</title>
+    <link rel="icon" href="https://th.bing.com/th/id/OIP.V-HqEcyo6HAdDedjZR_lDgAAAA?pid=ImgDet&rs=1" type="image/x-icon">
+    <style>
+      .frame{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .controls{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      body{
+        background:url('https://th.bing.com/th/id/R.2deada73e9ac21c977af51273d04ac41?rik=AfTGnPletbT9jQ&riu=http%3a%2f%2fwallpapercave.com%2fwp%2fntYEFqo.jpg&ehk=YoGZa1LmdltRG4BJ5DfnuyvBO8Brsu1ummTkbnve%2bwk%3d&risl=&pid=ImgRaw&r=0')
+      }
+      
+    </style>
+  </head>
+  <body>
+    <main>
+        <h1 style="text-align:center;color:white">Experience OpenCV Online</h1>  
+        <div>
+          <div class="controls">
+            
+            <button onclick="streamming()" name="button2" value="start">Click To Stream</button>
+            <button onclick="stop()" name="button" id="stop">Click To Stop</button>
+            
+          </div>
+          <br></br>
+           <div class="frame">
+            <img src="" width="60%" id="stream"/>
+           </div>
+           
+        </div>
+    </main>
+	<script>
+    function streamming(){
+      document.getElementById("stream").src = "{{ url_for('video') }}"
+    }
+    function stop(){
+      alert("You want to stop?");
+      document.getElementById("stream").src = ""
+      
+
+    }
+
+    
+  </script>
+  </body>
+</html>
