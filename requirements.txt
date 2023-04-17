@@ -1,0 +1,4 @@
+opencv-python
+flask==2.2.3
+mediapipe
+paho-mqtt
