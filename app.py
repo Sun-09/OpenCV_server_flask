@@ -1,6 +1,9 @@
 from flask import Flask, render_template, Response, request
 import cv2
 import mediapipe as mp
+import paho.mqtt.client as mqtt
+import time
+
 
 
 app = Flask(__name__)
@@ -9,6 +12,11 @@ mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
 
 camera = cv2.VideoCapture(0)
+
+mqttbroker = "test.mosquitto.org"
+client= mqtt.Client()
+client.connect(mqttbroker)
+print("connected")
 
 
 def func():
@@ -46,20 +54,26 @@ def func():
                                 #   deppeding on hand label.
                               if handLabel == "Left" and handLandmarks[4][0] > handLandmarks[3][0]:
                                 fingerCount = fingerCount+1
-                              elif handLabel == "Right" and handLandmarks[4][0] < handLandmarks[3][0]:
-                                fingerCount = fingerCount+1
+                                client.publish("opencv", 'a')
+                                
+                  
+                              
 
 
                                 # Other fingers: TIP y position must be lower than PIP y position, 
                                 #   as image origin is in the upper left corner.
                               if handLandmarks[8][1] < handLandmarks[6][1]:       #Index finger
                                 fingerCount = fingerCount+1
+                                client.publish("opencv", 'b')
                               if handLandmarks[12][1] < handLandmarks[10][1]:     #Middle finger
                                 fingerCount = fingerCount+1
+                                client.publish("opencv", 'c')
                               if handLandmarks[16][1] < handLandmarks[14][1]:     #Ring finger
                                 fingerCount = fingerCount+1
+                                client.publish("opencv", 'd')
                               if handLandmarks[20][1] < handLandmarks[18][1]:     #Pinky
                                 fingerCount = fingerCount+1
+                                client.publish("opencv", 'e')
 
 
                               mp_drawing.draw_landmarks(
