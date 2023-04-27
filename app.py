@@ -10,11 +10,12 @@ import time
 app = Flask(__name__)
 
 
+
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
 
-camera = cv2.VideoCapture(0)
+
 
 mqttbroker = "test.mosquitto.org"
 client= mqtt.Client()
@@ -23,6 +24,7 @@ print("connected")
 
 
 def func():
+    camera = cv2.VideoCapture(0)
     with mp_hands.Hands(
     model_complexity=0,
     min_detection_confidence=0.5,
